@@ -1,0 +1,8 @@
+../Core/25lcxx_driver/25LCxx_driver_interface.c:38:9:e_25LCxx_interface_spi_init	4	static
+../Core/25lcxx_driver/25LCxx_driver_interface.c:53:9:e_25LCxx_interface_spi_deinit	4	static
+../Core/25lcxx_driver/25LCxx_driver_interface.c:72:9:e_25LCxx_interface_spi_read	16	static
+../Core/25lcxx_driver/25LCxx_driver_interface.c:91:9:e_25LCxx_interface_spi_write	16	static
+../Core/25lcxx_driver/25LCxx_driver_interface.c:107:9:e_25LCxx_interface_gpio_write	16	static
+../Core/25lcxx_driver/25LCxx_driver_interface.c:123:9:e_25LCxx_interface_chip_select	16	static
+../Core/25lcxx_driver/25LCxx_driver_interface.c:137:6:e_25LCxx_interface_delay_ms	16	static
+../Core/25lcxx_driver/25LCxx_driver_interface.c:151:6:e_25LCxx_interface_debug_print	272	static

@@ -1,0 +1,59 @@
+# depslib dependency file v1.0
+1667825453 source:e:\project code\library master\25lcxxx eeprom\25lcxx and 25aaxx driver\25lcxx_eeprom driver\main.c
+	"25LCxx_driver_basic.h"
+	<math.h>
+
+1678864266 source:e:\project code\library master\25lcxxx eeprom\25lcxx and 25aaxx driver\25lcxx_eeprom driver\25lcxx_driver.c
+	"25LCxx_driver.h"
+
+1667907317 e:\project code\library master\25lcxxx eeprom\25lcxx and 25aaxx driver\25lcxx_eeprom driver\25lcxx_driver.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<stdint.h>
+	<stdbool.h>
+	<stdlib.h>
+	<stdarg.h>
+	<math.h>
+
+1667825492 source:e:\project code\library master\25lcxxx eeprom\25lcxx and 25aaxx driver\25lcxx_eeprom driver\25lcxx_driver_interface.c
+	"25LCxx_driver_interface.h"
+
+1667825599 e:\project code\library master\25lcxxx eeprom\25lcxx and 25aaxx driver\25lcxx_eeprom driver\25lcxx_driver_interface.h
+	"25LCxx_driver.h"
+
+1678714130 source:e:\project code\library master\25lcxxx eeprom\25lcxx and 25aaxx driver\25lcxx_eeprom driver\25lcxx_driver_basic.c
+	"25LCxx_driver_basic.h"
+
+1667825453 e:\project code\library master\25lcxxx eeprom\25lcxx and 25aaxx driver\25lcxx_eeprom driver\25lcxx_driver_basic.h
+	"25LCxx_driver_interface.h"
+
+1687465887 source:e:\library master\25lcxxx eeprom\25lcxx and 25aaxx driver\25lcxx_eeprom driver\25lcxx_driver.c
+	"25LCxx_driver.h"
+
+1687464116 e:\library master\25lcxxx eeprom\25lcxx and 25aaxx driver\25lcxx_eeprom driver\25lcxx_driver.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<stdint.h>
+	<stdbool.h>
+	<stdlib.h>
+	<stdarg.h>
+	<math.h>
+
+1687466235 source:e:\library master\25lcxxx eeprom\25lcxx and 25aaxx driver\25lcxx_eeprom driver\25lcxx_driver_basic.c
+	"25LCxx_driver_basic.h"
+
+1683214017 e:\library master\25lcxxx eeprom\25lcxx and 25aaxx driver\25lcxx_eeprom driver\25lcxx_driver_basic.h
+	"25LCxx_driver_interface.h"
+
+1667825599 e:\library master\25lcxxx eeprom\25lcxx and 25aaxx driver\25lcxx_eeprom driver\25lcxx_driver_interface.h
+	"25LCxx_driver.h"
+
+1683284768 source:e:\library master\25lcxxx eeprom\25lcxx and 25aaxx driver\25lcxx_eeprom driver\25lcxx_driver_interface.c
+	"25LCxx_driver_interface.h"
+
+1667825453 source:e:\library master\25lcxxx eeprom\25lcxx and 25aaxx driver\25lcxx_eeprom driver\main.c
+	"25LCxx_driver_basic.h"
+	<math.h>
+

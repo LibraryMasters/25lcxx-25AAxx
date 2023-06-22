@@ -1,0 +1,17 @@
+<extension-container xmlversion="2.0">
+  <extension org="CN" uuid="0632bfb3-c2e1-4078-8dae-1d6b674fcdfa" shortname="FP" version="1.0.0" fullname="Firmware Project">
+    <!--
+		     Author name can be copied to VSIX
+		     Author website can be copied VSIX (MoreInfoUrl)
+		 -->
+    <author name="Company Name" website="" email="support@Author.com" />
+    <description />
+    <icon-image path="" />
+    <preview-image path="" />
+    <!-- License must be exported to file for VSIX if it is found in the XML-->
+    <license caption="License" path="License.txt" />
+    <release-notes caption="ASF release notes" url="" />
+    <!--<content-extension org="Atmel" shortname="ASF" version="latest" eid="asf"/>-->
+    <dependencies />
+  </extension>
+</extension-container>

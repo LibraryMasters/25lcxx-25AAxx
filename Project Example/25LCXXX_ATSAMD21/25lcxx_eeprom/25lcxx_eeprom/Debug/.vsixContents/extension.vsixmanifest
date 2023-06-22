@@ -1,0 +1,26 @@
+﻿<Vsix Version="1.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2010" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Identifier Id="0632bfb3-c2e1-4078-8dae-1d6b674fcdfa">
+    <Name>Firmware Project</Name>
+    <Author>Company Name</Author>
+    <Version>1.0.0</Version>
+    <Description xml:space="preserve">
+            Description of the main features. Mention also the supported part number(s), the board it is running on and the compiler it supports
+        </Description>
+    <Locale>1033</Locale>
+    <License>License.txt</License>
+    <MoreInfoUrl></MoreInfoUrl>
+    <GettingStartedGuide></GettingStartedGuide>
+    <Icon></Icon>
+    <PreviewImage></PreviewImage>
+    <InstalledByMsi>false</InstalledByMsi>
+    <SupportedProducts>
+      <IsolatedShell Version="7.0">AtmelStudio</IsolatedShell>
+    </SupportedProducts>
+    <AllUsers>false</AllUsers>
+    <SupportedFrameworkRuntimeEdition MinVersion="4.0" MaxVersion="4.5" />
+  </Identifier>
+  <References />
+  <Content>
+    <CustomExtension Type="asf-manifest">asf-manifest.xml</CustomExtension>
+  </Content>
+</Vsix>

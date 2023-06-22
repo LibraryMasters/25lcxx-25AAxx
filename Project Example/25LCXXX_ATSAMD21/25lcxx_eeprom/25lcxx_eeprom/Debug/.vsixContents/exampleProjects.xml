@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<AsfProjects>
+  <Project>
+    <ProjectDeviceSeries>samd21</ProjectDeviceSeries>
+    <ProjectName>25LCXX_EEPROM</ProjectName>
+    <ProjectBoardVendor></ProjectBoardVendor>
+    <ProjectId>pid.33029055-1af3-435f-9672-b7d90891ee1b</ProjectId>
+    <ProjectHelpPath></ProjectHelpPath>
+    <ProjectCaption>25lcxx_eeprom - atsamd21g18a</ProjectCaption>
+    <ProjectDevice>ATSAMD21G18A</ProjectDevice>
+    <ProjectType>normal</ProjectType>
+    <ProjectDescription>Description of the main features. Mention also the supported part number(s), the board it is running on and the compiler it supports</ProjectDescription>
+    <ProjectHelpUrl></ProjectHelpUrl>
+  </Project>
+</AsfProjects>
