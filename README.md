@@ -41,10 +41,10 @@ The Library masters 25AAxx/25LCxx is the full-function driver of the SHT4x senso
 
 
   ### Examples
-  - [STM32L432 (STM32CubeIDE)](https://github.com/LibraryMasters/sht4x/tree/master/Project%20Example/STM32L432/sht40x_temp_sens_k423kc)
-  - [PIC24FJ128GA705 (MPLAB X IDE)](https://github.com/LibraryMasters/sht4x/tree/master/Project%20Example/PIC24FJ128GA705/sht40x_Temp_himidity_sens.X)
-  - [SAMD21G18 (Atmel studio 7)](https://github.com/LibraryMasters/sht4x/tree/master/Project%20Example/SAMD21/sht40x_Temp_humidity)
-  - [ATMEGA4808 (Atmel studio 7)](https://github.com/LibraryMasters/sht4x/tree/master/Project%20Example/ATMEGA4808/sht40x_Temp_humidity)
+  - [STM32L432 (STM32CubeIDE)](https://github.com/LibraryMasters/25lcxx-25AAxx/tree/master/Project%20Example/25LCXXX_STM32L432KUC6)
+  - [PIC24FJ128GA705 (MPLAB X IDE)](https://github.com/LibraryMasters/25lcxx-25AAxx/tree/master/Project%20Example/25LCXXX_PIC24FJ128GA705)
+  - [SAMD21G18 (Atmel studio 7)](https://github.com/LibraryMasters/25lcxx-25AAxx/tree/master/Project%20Example/25LCXXX_ATSAMD21)
+  - [ATMEGA4808 (Atmel studio 7)](https://github.com/LibraryMasters/25lcxx-25AAxx/tree/master/Project%20Example/25LCXXX_ATMEGA4808)
   ### Usage
   #### example basic
 
