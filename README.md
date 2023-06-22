@@ -99,17 +99,17 @@ int main(void)
 	
 		e_25LCxx_interface_debug_print("Block protect status: %d\n", singleByteDataRead);
 		
-		//err = e_25LCxx_basic_erase_sector(0 , 9);									  /**< attempt to erase a protected region */
-		//e_25LCxx_basic_put_byte(10, (uint32_t *)&dateTime,  sizeof(dateTime));
+		//err = e_25LCxx_basic_erase_sector(0 , 9);						/**< attempt to erase a protected region */
+		//e_25LCxx_basic_put_byte(10, (uint32_t *)&dateTime,  sizeof(dateTime));		/**< write a 4 bytes long integer, This function is an equivalent to the Arduino "eeprom_put" function  */ 
 		//err = e_25LCxx_basic_erase_page(1);
-	 	//err = e_25LCxx_basic_update(0,(uint8_t *)pDataWrite, 10);
+	 	//err = e_25LCxx_basic_write_byte(0,(uint8_t *)pDataWrite, 10);
 		
 		err= e_25LCxx_basic_read_byte(dataAddress, (uint8_t *)pDataRead, numByteRead);
 		for (int index = 0; index < numByteRead; index++){
 			e_25LCxx_interface_debug_print("address read: %d Data Read :%x\n",index, pDataRead[index]);
 		}
 		
-		//err = e_25LCxx_basic_update(0,(uint8_t *)pDataWrite, 10);
+		//err = e_25LCxx_basic_update(0,(uint8_t *)pDataWrite, 10);                   /**< This function is an equivalent to the arduino "eeprom_update" function */
 		//err = e_25LCxx_basic_erase_page(2);
 	
 		/*for(int index = 0; index < e_25LCxx_basic_get_eeprom_legth(); ++index){
@@ -119,11 +119,11 @@ int main(void)
 			e_25LCxx_interface_debug_print("\n\r");
 		}*/
 		
-		err = e_25LCxx_basic_get_byte(10, (uint32_t *)&byteGet, sizeof(byteGet)); 
+		err = e_25LCxx_basic_get_byte(10, (uint32_t *)&byteGet, sizeof(byteGet));         /**< get byte from address 10 (this function equivalent to Arduino "eeprom_get" function) */
 		e_25LCxx_interface_debug_print("\nGet date: %lu\n", byteGet);
 		
-		err = e_25LCxx_basic_erase_page(64);											  /**< erasing memory page 64 (address: 1008 - 1023)*/
-		err = e_25LCxx_basic_erase_sector(1532, 1540);									  /**< attempt to erase a protected region */
+		err = e_25LCxx_basic_erase_page(64);						  /**< erasing memory page 64 (address: 1008 - 1023)*/
+		err = e_25LCxx_basic_erase_sector(1532, 1540);					  /**< attempt to erase a protected region */
 		err = e_25LCxx_basic_write_byte(2011,(uint8_t *)pDataWrite, sizeof(pDataWrite));  /**< attempt to write block of data bigger than the page size, in a protected region*/
 		
 		err = e_25LCxx_basic_get_memory_properties((uint16_t*) &totalSize, (uint16_t *)&freeSpace, (uint16_t *)&usedSpace);
