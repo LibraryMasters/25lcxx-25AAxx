@@ -73,7 +73,7 @@ int main(void)
 	/* Initializes MCU, drivers and middle ware */
 	atmel_start_init();
 	
-	err = e_25LCxx_basic_initialize(E_25LC160x_VARIANT, E_25LCXX_PAGE_SIZE_16_BYTE);
+	err = e_25LCxx_basic_initialize(E_25LC160x_VARIANT, E_25LCXX_PAGE_SIZE_16_BYTE);		/**< initialize chip, pass in the variant and page size */
 	E_25LCxx_info(&e_25LCxxInfo);
 	
 	e_25LCxx_interface_debug_print("Chip Name: \t%s\r\n", e_25LCxxInfo.chip_name);
@@ -89,15 +89,20 @@ int main(void)
 	/* Replace with your application code */
 	
 		dataAddress = 0;          /**< start read operation at eeprom address 0*/
-		numByteRead = 25;		      /**< read 25 bytes */
+		numByteRead = 25;	  /**< read 25 bytes */
 	
 	  err = e_25LCxx_basic_get_bp_status((uint8_t *)&singleByteDataRead);
+		if(err)
+		{
+			/**< execute error handler/ do something */
+		}
+	
 		e_25LCxx_interface_debug_print("Block protect status: %d\n", singleByteDataRead);
 		
 		//err = e_25LCxx_basic_erase_sector(0 , 9);									  /**< attempt to erase a protected region */
 		//e_25LCxx_basic_put_byte(10, (uint32_t *)&dateTime,  sizeof(dateTime));
 		//err = e_25LCxx_basic_erase_page(1);
-	  //err = e_25LCxx_basic_update(0,(uint8_t *)pDataWrite, 10);
+	 	//err = e_25LCxx_basic_update(0,(uint8_t *)pDataWrite, 10);
 		
 		err= e_25LCxx_basic_read_byte(dataAddress, (uint8_t *)pDataRead, numByteRead);
 		for (int index = 0; index < numByteRead; index++){
