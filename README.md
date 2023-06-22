@@ -49,62 +49,85 @@ The Library masters 25AAxx/25LCxx is the full-function driver of the SHT4x senso
   #### example basic
 
   ```C
-#include "sht40x_driver_basic.h"
+#include "25LCxx_driver_basic.h"
 
-sht40x_info_t sht40xInfo;
-sht40x_data_t dataRead;
+E_25LCxx_info_t e_25LCxxInfo;           /**< info structure object */
 
+/****application declaration***/
+
+uint8_t pDataRead[25];					             /**< buffer to hold data read */
+const uint8_t pDataWrite[10] = {0x00, 0x12, 0x54, 0x46, 0x95, 0xa5, 0xb7, 0xc3, 0xf4, 0x2d};						/**< buffer to write */
+uint8_t numByteRead;										    /**< number of bytes to read/write */
+uint8_t singleByteDataRead;									/**< data to store single byte data read */
+uint16_t dataAddress;										    /**< eeprom address (read/write)*/
+uint32_t byteGet;
+uint32_t dateTime = 2305031413;
+float floatData = 45.5f;
 int err;
-uint32_t UID;
-uint8_t variant;
-uint8_t deviceAdd;
-float tempBuffer = 0;
-float humidityBuffer = 0;
-uint8_t NumberSamples = 10;
+uint16_t totalSize, freeSpace, usedSpace;
 
-int main()
+/***End***/
+
+int main(void)
 {
+	/* Initializes MCU, drivers and middle ware */
+	atmel_start_init();
+	
+	err = e_25LCxx_basic_initialize(E_25LC160x_VARIANT, E_25LCXX_PAGE_SIZE_16_BYTE);
+	E_25LCxx_info(&e_25LCxxInfo);
+	
+	e_25LCxx_interface_debug_print("Chip Name: \t%s\r\n", e_25LCxxInfo.chip_name);
+	e_25LCxx_interface_debug_print("Manufacture: \t%s\r\n", e_25LCxxInfo.manufacturer_name);
+	e_25LCxx_interface_debug_print("Interface: \t%s\r\n", e_25LCxxInfo.interface);
+	e_25LCxx_interface_debug_print("Supply Volt Max: \t%.1fV\r\n", e_25LCxxInfo.supply_voltage_max_v);
+	e_25LCxx_interface_debug_print("Supply Volt Min: \t%.1fV\r\n", e_25LCxxInfo.supply_voltage_min_v);
+	e_25LCxx_interface_debug_print("Maximum Current: \t%.1fmA\r\n", e_25LCxxInfo.max_current_ma);
+	e_25LCxx_interface_debug_print("Temperature Max: \t%.1fC\r\n", e_25LCxxInfo.temperature_max);
+	e_25LCxx_interface_debug_print("Temperature Min: \t%.1fC\r\n", e_25LCxxInfo.temperature_min);
+	e_25LCxx_interface_debug_print("Driver Version: \tV%.1f.%.2d\r\n", (e_25LCxxInfo.driver_version /1000), (uint8_t)(e_25LCxxInfo.driver_version - (uint8_t)(e_25LCxxInfo.driver_version /100)*100));
 
-    sht40x_basic_initialize(SHT40_AD1B_VARIANT);
-    sht40x_info(&sht40xInfo);
-
-    sht40x_interface_debug_print("Chip Name: \t%s\r\n", sht40xInfo.chip_name);
-    sht40x_interface_debug_print("Manufacturer: \t%s\r\n",sht40xInfo.manufacturer_name);
-    sht40x_interface_debug_print("Interface Protocol: \t%s\r\n", sht40xInfo.interface);
-    sht40x_interface_debug_print("Supply Volt Max: \t%.1f V\r\n",sht40xInfo.supply_voltage_max_v);
-    sht40x_interface_debug_print("Supply Volt Min: \t%.1f V\r\n",sht40xInfo.supply_voltage_min_v);
-    sht40x_interface_debug_print("Maximum Current: \t%.1f uA\r\n",sht40xInfo.max_current_ma);
-    sht40x_interface_debug_print("Max Temperature: \t%.1f C\r\n",sht40xInfo.temperature_max);
-    sht40x_interface_debug_print("Diver Version: \t\tV%.1f.%.2d\r\n",(sht40xInfo.driver_version /1000), (uint8_t)(sht40xInfo.driver_version - (uint8_t)(sht40xInfo.driver_version / 100)*100));
-
-    err =  sht40x_basic_get_temp_rh(SHT40X_PRECISION_HIGH, &dataRead);
-    if(err)
-    {
-      sht40x_interface_debug_print("failed to read\n");
-    }
-    sht40x_interface_debug_print("\nTemp C: %.2f\n", dataRead.temperature_C);
-    sht40x_interface_debug_print("Temp F: %.2f\n", dataRead.temperature_F);
-    sht40x_interface_debug_print("Humidity: %.2f\n", dataRead.humidity);
-
-    /**Measure Temp and humidity with n number of samples */
-    err = sht40x_basic_get_temp_humidity_nSample(SHT40X_PRECISION_HIGH, &dataRead, NumberSamples);
-    sht40x_interface_debug_print("\nTemp C sampled: %.2f\n", dataRead.temperature_C);
-    sht40x_interface_debug_print("Humidity sampled: %.2f\n", dataRead.humidity);
-
-    /** Get device unique ID */
-    err = sht40x_basic_get_serial_number((uint32_t*) &UID);
-    if(err)
-    {
-      /**< do something */
-    }
-    sht40x_interface_debug_print("serial number : %lu\n", UID);
-
-    /** Activate heater and measure temperature */
-    err = sht40x_basic_activate_heater(SHT40X_HEATER_POWER_20mW_100mS, &dataRead);
-    sht40x_interface_debug_print("\nHeater Temp C: %.2f\n", dataRead.temperature_C);
-    sht40x_interface_debug_print("Heater Temp F: %.2f\n", dataRead.temperature_F);
-    sht40x_interface_debug_print("Heater Humidity: %.2f\n", dataRead.humidity);
-    return 0;
+	/* Replace with your application code */
+	
+		dataAddress = 0;          /**< start read operation at eeprom address 0*/
+		numByteRead = 25;		      /**< read 20 bytes */
+	
+	  err = e_25LCxx_basic_get_bp_status((uint8_t *)&singleByteDataRead);
+		e_25LCxx_interface_debug_print("Block protect status: %d\n", singleByteDataRead);
+		
+		//err = e_25LCxx_basic_erase_sector(0 , 9);									  /**< attempt to erase a protected region */
+		//e_25LCxx_basic_put_byte(10, (uint32_t *)&dateTime,  sizeof(dateTime));
+		//err = e_25LCxx_basic_erase_page(1);
+	  //err = e_25LCxx_basic_update(0,(uint8_t *)pDataWrite, 10);
+		
+		err= e_25LCxx_basic_read_byte(dataAddress, (uint8_t *)pDataRead, numByteRead);
+		for (int index = 0; index < numByteRead; index++){
+			e_25LCxx_interface_debug_print("address read: %d Data Read :%x\n",index, pDataRead[index]);
+		}
+		
+		//err = e_25LCxx_basic_update(0,(uint8_t *)pDataWrite, 10);
+		//err = e_25LCxx_basic_erase_page(2);
+	
+		/*for(int index = 0; index < e_25LCxx_basic_get_eeprom_legth(); ++index){
+			err = e_25LCxx_basic_read_byte(index, (uint8_t *)&singleByteDataRead, 1);
+			e_25LCxx_interface_debug_print(" add: %d data: 0x%x", index, singleByteDataRead);
+			if(index % 10 == 0)
+			e_25LCxx_interface_debug_print("\n\r");
+		}*/
+		
+		err = e_25LCxx_basic_get_byte(10, (uint32_t *)&byteGet, sizeof(byteGet)); 
+		e_25LCxx_interface_debug_print("\nGet date: %lu\n", byteGet);
+		
+		err = e_25LCxx_basic_erase_page(64);											  /**< erasing memory page 64 (address: 1008 - 1023)*/
+		err = e_25LCxx_basic_erase_sector(1532, 1540);									  /**< attempt to erase a protected region */
+		err = e_25LCxx_basic_write_byte(2011,(uint8_t *)pDataWrite, sizeof(pDataWrite));  /**< attempt to write block of data bigger than the page size, in a protected region*/
+		
+		err = e_25LCxx_basic_get_memory_properties((uint16_t*) &totalSize, (uint16_t *)&freeSpace, (uint16_t *)&usedSpace);
+		e_25LCxx_interface_debug_print("Total size : %d Bytes\nFree space: %d Bytes\nUsed space: %d Bytes\n", totalSize, freeSpace, usedSpace);
+	
+	while (1) {
+		LED_GREEN_toggle_level();
+		e_25LCxx_interface_delay_ms(1000);
+	}
 }
   ```
 
@@ -113,43 +136,61 @@ int main()
   ```C
   ...
 
-uint8_t sht40x_interface_i2c_read(uint8_t addr, uint8_t reg, uint8_t *buf, uint16_t len)
+uint8_t e_25LCxx_interface_spi_read(uint16_t u16Reg, uint32_t *pbuf, uint16_t u16Len)
 {
-    /*call your i2c read function here*/
+    /*call your spi read function here*/
     /*user code begin */
-     if(i2c_read(addr, reg, buf, len) != 0)
-     {
-         return 1;
-     }
+    spi_read(u16Reg, (uint8_t*)pbuf, u16Len);
     /*user code end*/
-    return 0; /**< success */
+    return 0;      /**< return success */
 }
 
-uint8_t sht40x_interface_i2c_write(uint8_t addr, uint8_t reg, uint8_t *buf, uint16_t len)
+uint8_t e_25LCxx_interface_spi_write(uint16_t u16Reg, uint32_t *pbuf, uint16_t u16Len)
 {
-    /*call your i2c write function here*/
+    /*call your spi write function here*/
     /*user code begin */
-     if(i2c_write(addr, reg, buf, len) != 0)
-     {
-         return 1;
-     }
+    spi_write(u16Reg, (uint8_t*)pbuf, u16Len);
     /*user code end*/
-    return 0; /**< success */
+    return 0;      /**< return success */
 }
 
-void sht40x_interface_delay_ms(uint32_t u32Ms)
+uint8_t e_25LCxx_interface_gpio_write(uint8_t u8State)
+{
+    /*call your gpio write function here*/
+    /*user code begin */
+
+    /*user code end*/
+    return 0;       /**< return success */
+}
+
+uint8_t e_25LCxx_interface_chip_select(uint8_t u8State)
+{
+    /*call your spi chip select function here*/
+    /*user code begin */
+    spi_chip_select(u8State);
+    /*user code end*/
+    return 0;      /**< return success */
+}
+
+/**
+ * @brief  This function interface delay ms
+ * @param[in] u32Ms is the time delay in milliseconds
+ * @note      none
+ */
+void e_25LCxx_interface_delay_ms(uint32_t u32Ms)
 {
     /*call your delay function here*/
     /*user code begin */
-    delay_ms(u32Ms);          //(use your IDE api delay function)
+    delay_ms(u32Ms);
     /*user code end*/
+
 }
 
-void sht40x_interface_debug_print(const char *const fmt, ...)
+void e_25LCxx_interface_debug_print(const char *const fmt, ...)
 {
     /*call your call print function here*/
     /*user code begin */
-//#ifdef SHT40X_DEBUG_MODE
+#ifdef E_25LCXX_DEBUG_MODE
     volatile char str[256];
     volatile uint8_t len;
     va_list args;
@@ -160,11 +201,10 @@ void sht40x_interface_debug_print(const char *const fmt, ...)
     va_end(args);
 
     len = strlen((char *) str);
-    //   EUSART1_Write_Text((const char *) str, len);        /**< example of a usart function */
-      printf((char *const *)str, len);                  /**< example of printf function, comment out if not used */
+    printf((char *const)str, len);
 
     /*user code end*/
-//#endif
+#endif
 }
 
   ...
@@ -172,10 +212,10 @@ void sht40x_interface_debug_print(const char *const fmt, ...)
   ```
 
   ### Document
-  [datasheet](https://github.com/LibraryMasters/sht4x/blob/master/Document/Datasheet_SHT4x%20temperature%20sensor.pdf)
+  [datasheet](https://github.com/LibraryMasters/25lcxx-25AAxx/blob/master/Document/25LCXXX-8K-256K-SPI-Serial-EEPROM-High-Temp-Family-Data-Sheet-20002131E.pdf)
   
   ### Contribute
-   1. Clone repo and create a new branch: ```https://github.com/LibraryMasters/sht4x_PR.git```
+   1. Clone repo and create a new branch: ```https://github.com/LibraryMasters/25LCXX-25AAXX_PR.git```
    2. Make changes and test
    3. Submit a Pull Request with a comprehensive description of changes
   ### License
