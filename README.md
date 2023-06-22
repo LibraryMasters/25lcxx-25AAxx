@@ -9,7 +9,7 @@
 25AAxx/25LCxx are Serial Electrically Erasable EEPROMs. The memory is accessed via a simple Serial Peripheral Interface (SPI) compatible serial bus.
 The bus signals required are a clock input (SCK) plus separate data in (SI) and data out (SO) lines. Access to the device is controlled through a Chip Select (CS) input.
 
-The Library masters 25AAxx/25LCxx is the full-function driver of the SHT4x sensors series ((25LC080C/25LC080D/25LC160C/ 25LC160D/25LC320A/25LC640A/ 25LC128/25LC256/25LC512, 25AA080C/25AA080D/25AA160C/ 25AA160D/25AA320A/25AA640A/ 25LC128/25AA256/25AA512)). The driver is written in C language with Code Blocks, It provides the functions to read and write the memory.
+The Library masters 25AAxx/25LCxx is the full-function driver of the 25AAxx and 25LCxx eeprom family (25LC080C/25LC080D/25LC160C/ 25LC160D/25LC320A/25LC640A/ 25LC128/25LC256/25LC512, 25AA080C/25AA080D/25AA160C/ 25AA160D/25AA320A/25AA640A/ 25LC128/25AA256/25AA512). The driver is written in C language with Code Blocks, It provides the functions to read and write the memory.
 
 ### Table of Cnntents
 
