@@ -87,13 +87,13 @@
  */
 typedef enum
 {
-    E_25LC080x_VARIANT = 1,       /**< the 25LC08xx is the 8Kb variant */
-    E_25LC160x_VARIANT = 2,       /**< the 25LC16xx is the 16Kb variant */
-    E_25LC320x_VARIANT = 3,       /**< the 25LC32xx is the 32Kb variant */
-    E_25LC640x_VARIANT = 4,       /**< the 25LC64xx is the 64Kb variant */
-    E_25LC128_VARIANT  = 5,       /**< the 25LC128xx is the 128Kb variant */
-    E_25LC256_VARIANT  = 6,       /**< the 25LC256xx is the 256Kb variant */
-    E_25LC512_VARIANT  = 7        /**< the 25LC512xx is the 512Kb variant */
+    E_25LC080x_VARIANT = 1,       /**< the 25LC08xx/25AA08xx is the 8Kb variant */
+    E_25LC160x_VARIANT = 2,       /**< the 25LC16xx/25AA16xx is the 16Kb variant */
+    E_25LC320x_VARIANT = 3,       /**< the 25LC32xx/25AA32xx is the 32Kb variant */
+    E_25LC640x_VARIANT = 4,       /**< the 25LC64xx/25AA64xx is the 64Kb variant */
+    E_25LC128_VARIANT  = 5,       /**< the 25LC128xx/25AA128xx is the 128Kb variant */
+    E_25LC256_VARIANT  = 6,       /**< the 25LC256xx/25AA256xx is the 256Kb variant */
+    E_25LC512_VARIANT  = 7        /**< the 25LC512xx/25AA512xx is the 512Kb variant */
 } E_25LCxx_variant_t;
 
 /**
@@ -101,13 +101,13 @@ typedef enum
 */
 typedef enum
 {
-    E_25LC080x_MAX_ADD = 1023U,       /**< the 25LC08xx is the 8Kb (1024 byte) */
-    E_25LC160x_MAX_ADD = 2047U,       /**< the 25LC16xx is the 16Kb (2048 byte) */
-    E_25LC320x_MAX_ADD = 4095U,       /**< the 25LC32xx is the 32Kb (4096 byte) */
-    E_25LC640x_MAX_ADD = 8191U,       /**< the 25LC64xx is the 64Kb (8192 byte) */
-    E_25LC128_MAX_ADD = 16383U,       /**< the 25LC128xx is the 128Kb (16384 byte) */
-    E_25LC256_MAX_ADD = 32767U,       /**< the 25LC256xx is the 256Kb (32768 byte) */
-    E_25LC512_MAX_ADD = 65535U        /**< the 25LC512xx is the 512Kb (65536 byte) */
+    E_25LC080x_MAX_ADD = 1023U,       /**< the 25LC08xx/25AA08xx is the 8Kb (1024 byte) */
+    E_25LC160x_MAX_ADD = 2047U,       /**< the 25LC16xx/25AA16xx is the 16Kb (2048 byte) */
+    E_25LC320x_MAX_ADD = 4095U,       /**< the 25LC32xx/25AA32xx is the 32Kb (4096 byte) */
+    E_25LC640x_MAX_ADD = 8191U,       /**< the 25LC64xx/25AA64xx is the 64Kb (8192 byte) */
+    E_25LC128_MAX_ADD = 16383U,       /**< the 25LC128xx/25AA128xx is the 128Kb (16384 byte) */
+    E_25LC256_MAX_ADD = 32767U,       /**< the 25LC256xx/25AA256xx is the 256Kb (32768 byte) */
+    E_25LC512_MAX_ADD = 65535U        /**< the 25LC512xx/25AA512xx is the 512Kb (65536 byte) */
 }E_25LCxx_max_addr_t;
 
 /**
