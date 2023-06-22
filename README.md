@@ -89,7 +89,7 @@ int main(void)
 	/* Replace with your application code */
 	
 		dataAddress = 0;          /**< start read operation at eeprom address 0*/
-		numByteRead = 25;		      /**< read 20 bytes */
+		numByteRead = 25;		      /**< read 25 bytes */
 	
 	  err = e_25LCxx_basic_get_bp_status((uint8_t *)&singleByteDataRead);
 		e_25LCxx_interface_debug_print("Block protect status: %d\n", singleByteDataRead);
