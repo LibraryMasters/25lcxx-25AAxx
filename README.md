@@ -177,11 +177,6 @@ uint8_t e_25LCxx_interface_chip_select(uint8_t u8State)
     return 0;      /**< return success */
 }
 
-/**
- * @brief  This function interface delay ms
- * @param[in] u32Ms is the time delay in milliseconds
- * @note      none
- */
 void e_25LCxx_interface_delay_ms(uint32_t u32Ms)
 {
     /*call your delay function here*/
