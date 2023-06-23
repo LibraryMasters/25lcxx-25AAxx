@@ -201,6 +201,7 @@ void e_25LCxx_interface_debug_print(const char *const fmt, ...)
     va_end(args);
 
     len = strlen((char *) str);
+//  EUSART1_Write_Text((const char *) str, len);        /**< example of a usart function */
     printf((char *const)str, len);
 
     /*user code end*/
