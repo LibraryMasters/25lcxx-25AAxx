@@ -56,10 +56,10 @@ E_25LCxx_info_t e_25LCxxInfo;           /**< info structure object */
 /****application declaration***/
 
 uint8_t pDataRead[25];					             /**< buffer to hold data read */
-const uint8_t pDataWrite[10] = {0x00, 0x12, 0x54, 0x46, 0x95, 0xa5, 0xb7, 0xc3, 0xf4, 0x2d};						/**< buffer to write */
-uint8_t numByteRead;										    /**< number of bytes to read/write */
+const uint8_t pDataWrite[10] = {0x00, 0x12, 0x54, 0x46, 0x95, 0xa5, 0xb7, 0xc3, 0xf4, 0x2d};	/**< buffer to write */
+uint8_t numByteRead;										/**< number of bytes to read/write */
 uint8_t singleByteDataRead;									/**< data to store single byte data read */
-uint16_t dataAddress;										    /**< eeprom address (read/write)*/
+uint16_t dataAddress;										/**< eeprom address (read/write)*/
 uint32_t byteGet;
 uint32_t dateTime = 2305031413;
 float floatData = 45.5f;
