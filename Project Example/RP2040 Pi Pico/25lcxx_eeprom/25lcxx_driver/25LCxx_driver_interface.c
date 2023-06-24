@@ -73,7 +73,7 @@ uint8_t e_25LCxx_interface_spi_read(uint16_t u16Reg, uint32_t *pbuf, uint16_t u1
 {
     /*call your spi read function here*/
     /*user code begin */
-
+    spi_receive(u16Reg, pbuf, u16Len);
     /*user code end*/
     return 0;      /**< return success */
 }
@@ -92,7 +92,7 @@ uint8_t e_25LCxx_interface_spi_write(uint16_t u16Reg, uint32_t *pbuf, uint16_t u
 {
     /*call your spi write function here*/
     /*user code begin */
-
+    spi_transmit(u16Reg, pbuf, u16Len);
     /*user code end*/
     return 0;      /**< return success */
 }
@@ -124,7 +124,7 @@ uint8_t e_25LCxx_interface_chip_select(uint8_t u8State)
 {
     /*call your spi chip select function here*/
     /*user code begin */
-
+    spi_chip_select(u8State);
     /*user code end*/
     return 0;      /**< return success */
 }
@@ -138,7 +138,7 @@ void e_25LCxx_interface_delay_ms(uint32_t u32Ms)
 {
     /*call your delay function here*/
     /*user code begin */
-
+    sleep_ms(u32Ms);
     /*user code end*/
 
 }
@@ -163,7 +163,7 @@ void e_25LCxx_interface_debug_print(const char *const fmt, ...)
     va_end(args);
 
     len = strlen((char *) str);
-    // printf((char *const)str, len);
+    printf((char *const)str, len);
 
     /*user code end*/
 #endif

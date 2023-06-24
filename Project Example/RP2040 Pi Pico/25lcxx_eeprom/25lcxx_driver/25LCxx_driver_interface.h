@@ -20,29 +20,31 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  *
- * File:   25LCxx_driver_interface.c
+ * File:   25LCxx_driver_interface.h
  * Author: Cedric Akilimali
  *
- * Created on August 16, 2022, 4:09 PM
+ * Created on August 16, 2022, 3:20 PM
  */
 
-#include "25LCxx_driver_interface.h"
+#ifndef _25LCXX_DRIVER_INTERFACE_H_INCLUDED
+#define _25LCXX_DRIVER_INTERFACE_H_INCLUDED
+
+#include "25LCxx_driver.h"
+
+extern uint8_t spi_transmit(uint16_t u16Register, uint8_t *pData, uint8_t u16Length);
+extern uint8_t spi_receive(uint16_t u16Register, uint8_t *pData, uint8_t u16Length);
+extern void spi_chip_select(uint8_t status);
+
+static E_25LCxx_handle_t e_25LCxx_handler;
 
 /**
-* @brief  interface spi bus init
-* @return status code
-*         - 0 success
-*         - 1 spi init failed
-* @note   none
-*/
-uint8_t e_25LCxx_interface_spi_init(void)
-{
-    /*call your spi initialize function here*/
-    /*user code begin */
-
-    /*user code end*/
-    return 0;      /**< return success */
-}
+ * @brief  interface spi bus init
+ * @return status code
+ *         - 0 success
+ *         - 1 spi init failed
+ * @note   none
+ */
+uint8_t e_25LCxx_interface_spi_init(void);
 
 /**
  * @brief interface spi bus deinit
@@ -50,14 +52,7 @@ uint8_t e_25LCxx_interface_spi_init(void)
  *          - 0 success
  *          - 1 spi deinit fail
  */
-uint8_t e_25LCxx_interface_spi_deinit(void)
-{
-    /*call your spi deinitialize function here*/
-    /*user code begin */
-
-    /*user code end*/
-    return 0;      /**< return success */
-}
+uint8_t e_25LCxx_interface_spi_deinit(void);
 
 /**
  * @brief      interface spi bus read
@@ -69,14 +64,7 @@ uint8_t e_25LCxx_interface_spi_deinit(void)
  *             - 1 read failed
  * @note       none
  */
-uint8_t e_25LCxx_interface_spi_read(uint16_t u16Reg, uint32_t *pbuf, uint16_t u16Len)
-{
-    /*call your spi read function here*/
-    /*user code begin */
-
-    /*user code end*/
-    return 0;      /**< return success */
-}
+uint8_t e_25LCxx_interface_spi_read(uint16_t u16Reg, uint32_t *pbuf, uint16_t u16Len);
 
 /**
  * @brief     interface spi bus write
@@ -88,30 +76,16 @@ uint8_t e_25LCxx_interface_spi_read(uint16_t u16Reg, uint32_t *pbuf, uint16_t u1
  *            - 1 write failed
  * @note      none
  */
-uint8_t e_25LCxx_interface_spi_write(uint16_t u16Reg, uint32_t *pbuf, uint16_t u16Len)
-{
-    /*call your spi write function here*/
-    /*user code begin */
-
-    /*user code end*/
-    return 0;      /**< return success */
-}
+uint8_t e_25LCxx_interface_spi_write(uint16_t u16Reg, uint32_t *pbuf, uint16_t u16Len);
 
 /**
- * @brief   interface gpio write (write enable or hold pin)
+ * @brief   interface gpio write
  * @param[in] u8State is the state logic level to be written
  * @return status code
  *          - 0 success
  *          - 1 failed to write gpio
  */
-uint8_t e_25LCxx_interface_gpio_write(uint8_t u8State)
-{
-    /*call your gpio write function here*/
-    /*user code begin */
-
-    /*user code end*/
-    return 0;       /**< return success */
-}
+uint8_t e_25LCxx_interface_gpio_write(uint8_t u8State);
 
 /**
  * @brief   This function interfaces chip select
@@ -120,51 +94,20 @@ uint8_t e_25LCxx_interface_gpio_write(uint8_t u8State)
  *          - 0 success
  *          - 1 failed to write gpio
  */
-uint8_t e_25LCxx_interface_chip_select(uint8_t u8State)
-{
-    /*call your spi chip select function here*/
-    /*user code begin */
-
-    /*user code end*/
-    return 0;      /**< return success */
-}
+uint8_t e_25LCxx_interface_chip_select(uint8_t u8State);
 
 /**
- * @brief  This function interface delay ms
- * @param[in] u32Ms is the time delay in milli seconds
+ * @brief     interface delay ms
+ * @param[in] u32Ms
  * @note      none
  */
-void e_25LCxx_interface_delay_ms(uint32_t u32Ms)
-{
-    /*call your delay function here*/
-    /*user code begin */
-
-    /*user code end*/
-
-}
+void e_25LCxx_interface_delay_ms(uint32_t u32Ms);
 
 /**
  * @brief     interface print format data
  * @param[in] fmt is the format data
  * @note      none
  */
-void e_25LCxx_interface_debug_print(const char *const fmt, ...)
-{
-    /*call your call print function here*/
-    /*user code begin */
-#ifdef E_25LCXX_DEBUG_MODE
-    volatile char str[256];
-    volatile uint8_t len;
-    va_list args;
+void e_25LCxx_interface_debug_print(const char *const fmt, ...);
 
-    memset((char *) str, 0, sizeof (char)*256);
-    va_start(args, fmt);
-    vsnprintf((char *) str, 256, (char const *) fmt, args);
-    va_end(args);
-
-    len = strlen((char *) str);
-    // printf((char *const)str, len);
-
-    /*user code end*/
-#endif
-}
+#endif // 25LCXX_DRIVER_INTERFACE_H_INCLUDED
