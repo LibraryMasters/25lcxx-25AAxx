@@ -102,7 +102,7 @@ int main(void)
 	e_25LCxx_interface_delay_ms(2000);
 
 	/* eeprom get */
-        e_25LCxx_basic_get_byte(11, (uint32_t *)&byteGet, sizeof(byteGet));                /**< get a 4-byte long number byte from address 11 (this function equivalent to Arduino "eeprom_get" function) */
+        e_25LCxx_basic_get_byte(11, (uint32_t *)&byteGet, sizeof(byteGet));                /**< get a 4-byte long integer from address 11 (this function equivalent to Arduino "eeprom_get" function) */
 	e_25LCxx_interface_debug_print("\nGet date: %lu\n", byteGet);
 
  	/* eeprom update */
