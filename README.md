@@ -98,15 +98,15 @@ int main(void)
         e_25LCxx_interface_delay_ms(2000);
 
 	/* eeprom put */
-	e_25LCxx_basic_put_byte(11, (uint32_t *)&dateTime,  sizeof(dateTime));		/**< write a 4 bytes long integer, This function is equivalent to the Arduino "eeprom_put" function  */ 
+	e_25LCxx_basic_put_byte(11, (uint32_t *)&dateTime,  sizeof(dateTime));		   /**< write a 4 bytes long integer, This function is equivalent to the Arduino "eeprom_put" function  */ 
 	e_25LCxx_interface_delay_ms(2000);
 
 	/* eeprom get */
-        e_25LCxx_basic_get_byte(11, (uint32_t *)&byteGet, sizeof(byteGet));         /**< get a 4-byte long number byte from address 11 (this function equivalent to Arduino "eeprom_get" function) */
+        e_25LCxx_basic_get_byte(11, (uint32_t *)&byteGet, sizeof(byteGet));                /**< get a 4-byte long number byte from address 11 (this function equivalent to Arduino "eeprom_get" function) */
 	e_25LCxx_interface_debug_print("\nGet date: %lu\n", byteGet);
 
  	/* eeprom update */
-	e_25LCxx_basic_update(0,(uint8_t *)pDataWrite, 10);                            /**< This function is an equivalent to the arduino "eeprom_update" function */
+	e_25LCxx_basic_update(0,(uint8_t *)pDataWrite, 10);                                /**< This function is an equivalent to the arduino "eeprom_update" function */
 
 	/* check the block protect status */
 	e_25LCxx_basic_get_bp_status((uint8_t *)&singleByteDataRead);
