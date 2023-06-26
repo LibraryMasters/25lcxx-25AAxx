@@ -56,10 +56,10 @@ E_25LCxx_info_t e_25LCxxInfo;           /**< info structure object */
 /****application declaration***/
 
 uint8_t pDataRead[25];					             /**< buffer to hold data read */
-const uint8_t pDataWrite[10] = {0x00, 0x12, 0x54, 0x46, 0x95, 0xa5, 0xb7, 0xc3, 0xf4, 0x2d};	/**< buffer to write */
-uint8_t numByteRead;										/**< number of bytes to read/write */
-uint8_t singleByteDataRead;									/**< data to store single byte data read */
-uint16_t dataAddress;										/**< eeprom address (read/write)*/
+const uint8_t pDataWrite[10] = {0x00, 0x12, 0x54, 0x46, 0x95, 0xa5, 0xb7, 0xc3, 0xf4, 0x2d};	        /**< buffer to write */
+uint8_t numByteRead = 25;										/**< number of bytes to read/write */
+uint8_t singleByteDataRead;									        /**< data to store single byte data read */
+uint16_t dataAddress = 0;										/**< eeprom address (read/write)*/
 uint32_t byteGet;
 uint32_t dateTime = 2305031413;
 float floatData = 45.5f;
@@ -70,7 +70,7 @@ uint16_t totalSize, freeSpace, usedSpace;
 
 int main(void)
 {
-	/* Initializes MCU, drivers and middle ware */
+	/* Initializes MCU, drivers and middleware */
 	atmel_start_init();
 	
 	err = e_25LCxx_basic_initialize(E_25LC160x_VARIANT, E_25LCXX_PAGE_SIZE_16_BYTE);		/**< initialize chip, pass in the variant and page size */
@@ -86,48 +86,44 @@ int main(void)
 	e_25LCxx_interface_debug_print("Temperature Min: \t%.1fC\r\n", e_25LCxxInfo.temperature_min);
 	e_25LCxx_interface_debug_print("Driver Version: \tV%.1f.%.2d\r\n", (e_25LCxxInfo.driver_version /1000), (uint8_t)(e_25LCxxInfo.driver_version - (uint8_t)(e_25LCxxInfo.driver_version /100)*100));
 
-	/* Replace with your application code */
+	/* eeprom data write */
+	e_25LCxx_basic_write_byte(dataAddress,(uint8_t *)pDataWrite, sizeof(pDataWrite));  /**< write a block of data*/
+	e_25LCxx_interface_delay_ms(2000);
+
+	/* eeprom data read */
+	e_25LCxx_basic_read_byte(dataAddress, (uint8_t *)pDataRead, numByteRead);
+	for (int index = 0; index < numByteRead; index++){
+		e_25LCxx_interface_debug_print("address read: %d Data Read :%x\n",index, pDataRead[index]);
+	}
+        e_25LCxx_interface_delay_ms(2000);
+
+	/* eeprom put */
+	e_25LCxx_basic_put_byte(11, (uint32_t *)&dateTime,  sizeof(dateTime));		/**< write a 4 bytes long integer, This function is equivalent to the Arduino "eeprom_put" function  */ 
+	e_25LCxx_interface_delay_ms(2000);
+
+	/* eeprom get */
+        e_25LCxx_basic_get_byte(11, (uint32_t *)&byteGet, sizeof(byteGet));         /**< get a 4-byte long number byte from address 11 (this function equivalent to Arduino "eeprom_get" function) */
+	e_25LCxx_interface_debug_print("\nGet date: %lu\n", byteGet);
+
+ 	/* eeprom update */
+	e_25LCxx_basic_update(0,(uint8_t *)pDataWrite, 10);                            /**< This function is an equivalent to the arduino "eeprom_update" function */
+
+	/* check the block protect status */
+	e_25LCxx_basic_get_bp_status((uint8_t *)&singleByteDataRead);
+	e_25LCxx_interface_debug_print("Block protect status: %d\n", singleByteDataRead);
+
+ 	err = e_25LCxx_basic_erase_page(64);						  /**< erasing memory page 64 (address: 1008 - 1023)*/
+	err = e_25LCxx_basic_erase_sector(1532, 1540);					  /**< attempt to erase a protected region */
 	
-		dataAddress = 0;          /**< start read operation at eeprom address 0*/
-		numByteRead = 25;	  /**< read 25 bytes */
+	err = e_25LCxx_basic_get_memory_properties((uint16_t*) &totalSize, (uint16_t *)&freeSpace, (uint16_t *)&usedSpace);
+	e_25LCxx_interface_debug_print("Total size : %d Bytes\nFree space: %d Bytes\nUsed space: %d Bytes\n", totalSize, freeSpace, usedSpace);
 	
-	  err = e_25LCxx_basic_get_bp_status((uint8_t *)&singleByteDataRead);
-		if(err)
-		{
-			/**< execute error handler/ do something */
-		}
-	
-		e_25LCxx_interface_debug_print("Block protect status: %d\n", singleByteDataRead);
-		
-		//err = e_25LCxx_basic_erase_sector(0 , 9);						/**< attempt to erase a protected region */
-		//e_25LCxx_basic_put_byte(10, (uint32_t *)&dateTime,  sizeof(dateTime));		/**< write a 4 bytes long integer, This function is an equivalent to the Arduino "eeprom_put" function  */ 
-		//err = e_25LCxx_basic_erase_page(1);
-	 	//err = e_25LCxx_basic_write_byte(0,(uint8_t *)pDataWrite, 10);
-		
-		err= e_25LCxx_basic_read_byte(dataAddress, (uint8_t *)pDataRead, numByteRead);
-		for (int index = 0; index < numByteRead; index++){
-			e_25LCxx_interface_debug_print("address read: %d Data Read :%x\n",index, pDataRead[index]);
-		}
-		
-		//err = e_25LCxx_basic_update(0,(uint8_t *)pDataWrite, 10);                   /**< This function is an equivalent to the arduino "eeprom_update" function */
-		//err = e_25LCxx_basic_erase_page(2);
-	
-		/*for(int index = 0; index < e_25LCxx_basic_get_eeprom_legth(); ++index){
-			err = e_25LCxx_basic_read_byte(index, (uint8_t *)&singleByteDataRead, 1);
-			e_25LCxx_interface_debug_print(" add: %d data: 0x%x", index, singleByteDataRead);
-			if(index % 10 == 0)
-			e_25LCxx_interface_debug_print("\n\r");
-		}*/
-		
-		err = e_25LCxx_basic_get_byte(10, (uint32_t *)&byteGet, sizeof(byteGet));         /**< get byte from address 10 (this function equivalent to Arduino "eeprom_get" function) */
-		e_25LCxx_interface_debug_print("\nGet date: %lu\n", byteGet);
-		
-		err = e_25LCxx_basic_erase_page(64);						  /**< erasing memory page 64 (address: 1008 - 1023)*/
-		err = e_25LCxx_basic_erase_sector(1532, 1540);					  /**< attempt to erase a protected region */
-		err = e_25LCxx_basic_write_byte(2011,(uint8_t *)pDataWrite, sizeof(pDataWrite));  /**< attempt to write block of data bigger than the page size, in a protected region*/
-		
-		err = e_25LCxx_basic_get_memory_properties((uint16_t*) &totalSize, (uint16_t *)&freeSpace, (uint16_t *)&usedSpace);
-		e_25LCxx_interface_debug_print("Total size : %d Bytes\nFree space: %d Bytes\nUsed space: %d Bytes\n", totalSize, freeSpace, usedSpace);
+	/*for(int index = 0; index < e_25LCxx_basic_get_eeprom_legth(); ++index){
+		err = e_25LCxx_basic_read_byte(index, (uint8_t *)&singleByteDataRead, 1);
+		e_25LCxx_interface_debug_print(" add: %d data: 0x%x", index, singleByteDataRead);
+		if(index % 10 == 0)
+		e_25LCxx_interface_debug_print("\n\r");
+	}*/
 	
 	while (1) {
 		LED_GREEN_toggle_level();
