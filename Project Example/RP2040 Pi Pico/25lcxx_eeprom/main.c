@@ -5,9 +5,9 @@
 #include "hardware/gpio.h"
 #include "25lcxx_driver/25LCxx_driver_basic.h"
 
-/**BOARD SELCET (comment one of the two)*/
-#define MICRO_MODE_BOARD					    /**< using the micro mode from sparkfun*/
-// #define PI_PICO_BOARD							/**< using the pi pico board */
+/**BOARD SELECT (comment one of the two)*/
+//#define MICRO_MODE_BOARD					    /**< using the micro mode from SparkFun*/
+#define PI_PICO_BOARD						    /**< using the pi pico board */
 
 #define SPI_SCK			22						/*< spi clock pin*/
 #define SPI_NSS			21						/**< spi slave select pin*/
@@ -46,7 +46,7 @@ int main()
     gpio_set_function(PICO_DEFAULT_SPI_SCK_PIN, GPIO_FUNC_SPI);
     gpio_set_function(PICO_DEFAULT_SPI_TX_PIN, GPIO_FUNC_SPI); 
 
-	//Chip select is active-low, so we'll initialise it to a driven-high state
+	//Chip select is active-low, so we'll initialize it to a driven-high state
     gpio_init(PICO_DEFAULT_SPI_CSN_PIN);
     gpio_set_dir(PICO_DEFAULT_SPI_CSN_PIN, GPIO_OUT);
     gpio_put(PICO_DEFAULT_SPI_CSN_PIN, 1);
