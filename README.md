@@ -25,7 +25,7 @@ The Library masters 25AAxx/25LCxx is the full-function driver of the 25AAxx and 
   - [Acknowledgements](#Acknowledgements)
 
   ### Install
-  - The interface.c file expect the below functions to correctly link the driver 
+  - The interface.c file expect below functions to correctly link the driver 
   ```
     - spi_initialize function  ( optional )
     - spi_deinitialize function ( optional )
